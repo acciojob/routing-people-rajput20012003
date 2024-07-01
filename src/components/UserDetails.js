@@ -1,20 +1,26 @@
-import React from "react";
-import { NavLink, Route } from "react-router-dom";
-import Users from "./Users";
+// UserDetails.js
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-function UserDetails({ users }) {
-  // const user = users.find(u => u.id === parseInt(users.id, 10));
+const users = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+  { id: 3, name: 'Alice Johnson', email: 'alice@example.com' },
+];
+
+function UserDetails() {
+  const { userId } = useParams();
+  const user = users.find(user => user.id === parseInt(userId));
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
 
   return (
     <div>
-      <h1>User List</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>
-            <NavLink to={`/users/${user.id}`}>{user.name}</NavLink>
-          </li>
-        ))}
-      </ul>
+      <h1>User Details</h1>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
     </div>
   );
 }

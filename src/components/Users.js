@@ -1,25 +1,26 @@
+// UserList.js
 import React from 'react';
-import { useParams } from "react-router-dom"; 
+import { Link } from 'react-router-dom';
 
-function Users({users}) {
-  const {id} = useParams();
-  const itemId = parseInt(id, 10); // Parse the ID as an integer
-  const selectedItem = users.find((user) => user.id === itemId);
+const users = [
+  { id: 1, name: 'John Doe' },
+  { id: 2, name: 'Jane Smith' },
+  { id: 3, name: 'Alice Johnson' },
+];
 
+function UserList() {
   return (
     <div>
-
-      <h1>User Details</h1>
-
-      <p><b>Name:</b>{selectedItem.name}</p>
-      <p><b>UserName:</b>{selectedItem.username}</p>
-      <p><b>Email:</b>{selectedItem.email}</p>
-      <p><b>Phone:</b>{selectedItem.phone}</p>
-      <p><b>Website:</b>{selectedItem.website}</p>
-
-        
+      <h1>User List</h1>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>
+            <Link to={`/user/${user.id}`}>{user.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
-export default Users
+export default UserList;
